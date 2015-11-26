@@ -1,0 +1,28 @@
+{
+  "name": "tikz.js",
+  "version": "0.0.1",
+  "description": "Enables the creation of standalone graphics based on PGF/TikZ with the help of LaTeX and ImageMagick.",
+  "main": "tikz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tikz",
+    "latex",
+    "pgf",
+    "plots",
+    "picture",
+    "imagemagick",
+    "image"
+  ],
+  "author": "Florian Rappl",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "glob": "^6.0.1",
+    "pdf-image": "^1.0.1",
+    "replace-ext": "0.0.1",
+    "tmp": "0.0.28",
+    "yargs": "^3.30.0"
+  }
+}

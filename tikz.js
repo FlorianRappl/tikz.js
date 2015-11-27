@@ -53,26 +53,16 @@ var input = argv._[0];
 var dir = path.dirname(input);
 var output = replaceExt(argv._[1] || input, '.pdf');
 var program = argv.e;
-var template = ["\\documentclass[crop,tikz]{standalone}",
-                "\\renewcommand{\\familydefault}{\\sfdefault}",
-                "\\usepackage{pgfplots}",
-                "\\usepgfplotslibrary{groupplots}",
-                "\\usepgfplotslibrary{patchplots}",
-                "\\usetikzlibrary{arrows,positioning,pgfplots.polar,matrix}",
-                "\\pgfplotsset{",
-                "  compat=newest,",
-                "  y axis style/.style={yticklabel style=#1, ylabel style=#1, y axis line style=#1, ytick style=#1},",
-                "  legend style={draw=none, legend pos=outer north east, font=\\small }",
-                "}",
-                "\\begin{document}",
-                "\\input{$inputFile}",
-                "\\end{document}"].join('\n');
+var template = argv.template || 'template.tex';
+var templatePaths = [];
+var templateContent;
 
 function checkExists (file) {
   try { 
-    fs.statSync(file); 
-  } catch (_) { 
-    warn(chalk.red('The file %s could not be found.'), file); 
+    fs.statSync(file);
+    return true;
+  } catch (_) {
+    return false;
   }
 }
 
@@ -88,11 +78,29 @@ function debug() {
   verbose >= 2 && console.log.apply(console, arguments); 
 }
 
-checkExists(input);
+if (!checkExists(input)) {
+    warn(chalk.red('The file %s could not be found.'), file); 
+    return process.exit(1);
+}
 
-if (argv.template !== undefined) {
-  checkExists(argv.template);
-  template = fs.readFileSync(argv.template);
+if (!path.isAbsolute(template)) {
+  templates.push(path.join(process.cwd(), template));
+  templates.push(path.join(__dirname, template));
+  templates.push(path.join(__dirname, 'templates', template));
+} else {
+  templates.push(template);
+}
+
+for (var i = 0; i < templates.length; ++i) {
+  if (checkExists(templates[i])) {
+    templateContent = fs.readFileSync(templates[i]);
+    break;
+  }
+}
+
+if (!templateContent) {
+    warn(chalk.red('A valid template %s could not be found.'), template); 
+    return process.exit(1);
 }
 
 tmp.file({ mode: 0644, postfix: '.tex', dir: dir }, function (err, path, fd, cleanupCallback) {
@@ -100,7 +108,7 @@ tmp.file({ mode: 0644, postfix: '.tex', dir: dir }, function (err, path, fd, cle
 
   debug('Temporary file created: %s', path);
  
-  var content = template.replace(/\$inputFile/, input);
+  var content = templateContent.replace(/\\input{file}/, '\\input{' + input + '}');
 
   fs.writeFile(path, content, function (err) {
     if (err) throw err;

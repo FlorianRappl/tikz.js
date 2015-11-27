@@ -1,0 +1,14 @@
+\documentclass[crop,tikz]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{pgfplots}
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{patchplots}
+\usetikzlibrary{arrows,positioning,pgfplots.polar,matrix}
+\pgfplotsset{
+  compat=newest,
+  y axis style/.style={yticklabel style=#1, ylabel style=#1, y axis line style=#1, ytick style=#1},
+  legend style={draw=none, legend pos=outer north east, font=\small }
+}
+\begin{document}
+\input{file}
+\end{document}

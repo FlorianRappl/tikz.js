@@ -1,9 +1,11 @@
 {
   "name": "tikz.js",
   "version": "0.0.1",
-  "bin": { "tikz" : "./tikz.js" },
+  "bin": {
+    "tikz": "./tikz.js"
+  },
   "description": "Enables the creation of standalone graphics based on PGF/TikZ with the help of LaTeX and ImageMagick.",
-  "main": "tikz.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

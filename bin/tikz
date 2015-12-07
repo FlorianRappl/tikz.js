@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var tikz = require('./index.js');
+var tikz = require('../lib/tikz.js');
 var chalk = require('chalk');
 var argv = require('yargs').
            demand(1).
@@ -23,37 +23,34 @@ var argv = require('yargs').
            argv;
 
 var verbose = argv.verbose;
-
-function warn () { 
-  verbose >= 0 && console.log.apply(console, arguments);
-}
-
-function info () { 
-  verbose >= 1 && console.log.apply(console, arguments); 
-}
-
-function debug () { 
-  verbose >= 2 && console.log.apply(console, arguments); 
-}
-
 var conversion = tikz({
   input: argv._[0],
-  mode: argv.m,
   output: argv._[1],
+  mode: argv.m,
   program: argv.e,
-  template: argv.template || 'template.tex',
+  template: argv.template,
 });
 
 conversion.on('warn', function (message) {
-  warn(chalk.red(message));
+  verbose >= 0 && console.log(chalk.red(message));
 });
 
 conversion.on('info', function (message) {
-  warn(chalk.blue(message));
+  verbose >= 1 && console.log(chalk.blue(message)); 
 });
 
 conversion.on('debug', function (message) {
-  warn(chalk.yellow(message));
+  verbose >= 2 && console.log(chalk.yellow(message)); 
+});
+
+conversion.on('error', function (error) {
+  console.log(chalk.red(message));
+  process.exit(1);
+});
+
+conversion.on('done', function (file) {
+  console.log('File %s created.', file);
+  process.exit(0);
 });
 
 conversion.start();

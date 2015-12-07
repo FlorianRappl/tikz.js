@@ -2,12 +2,22 @@
   "name": "tikz.js",
   "version": "0.0.1",
   "bin": {
-    "tikz": "./tikz.js"
+    "tikz": "./bin/tikz"
   },
   "description": "Enables the creation of standalone graphics based on PGF/TikZ with the help of LaTeX and ImageMagick.",
+  "maintainers": [
+    {
+      "name": "Florian Rappl",
+      "web": "http://www.florian-rappl.de"
+    }
+  ],
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nodeunit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/FlorianRappl/tikz.js.git"
   },
   "keywords": [
     "tikz",
@@ -18,6 +28,9 @@
     "imagemagick",
     "image"
   ],
+  "directories": {
+    "lib": "./lib"
+  },
   "author": "Florian Rappl",
   "license": "MIT",
   "dependencies": {
@@ -27,5 +40,8 @@
     "replace-ext": "0.0.1",
     "tmp": "0.0.28",
     "yargs": "^3.30.0"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
   }
 }

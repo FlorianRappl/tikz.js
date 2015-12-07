@@ -35,9 +35,34 @@ tikz source.tikz target.png -m png
 
 The mode is independent from the file name.
 
+## API for Build Integration
+
+Besides the obvious way of using the CLI for triggering the compilation process, the project also comes with a very small API. Actually, the CLI only wraps the API.
+
+```js
+var conversion = tikz({
+  input: 'drawing.tikz',
+  mode: 'png',
+});
+
+conversion.on('done', function (output) {
+  console.log('File %s produced!', output);
+});
+
+conversion.start();
+```
+
+There are many more options and events. The most important ones are all used in the CLI wrapper. Currently, the only exposed function is `start`. It starts the transformation process(es).
+
 ## Why ?
 
-TODO
+A good answer would be "Why not?". In my opinion TikZ is one of the best applications to use programming for drawing high-quality graphics, e.g., for publication. Unfortunately, TikZ is only available as a TeX package. This drawback, however, is also one of the best reasons to prefer using TikZ over other (TeX-decoupled) solutions. It means that the best available typesetting capabilities can be used.
+
+I wanted a solution that uses the best parts of TeX (thus requiring / depending on TeX), while giving me a simple command line utility ready for compiling small dedicated files. The tool should be simple enough to be used in any kind of build system (possibly as a pre- or post-process).
+
+Why did I choose Node.js and not Bash, Python, ...? In my opinion the key differentiator lies in the NPM eco-system. Yes, Python has PIP (or other solutions), but there are a few convenience utilities that render working with NPM / Node.js joyful. Besides, I am relying on a bunch of handy modules that have already been released.
+
+So long answer short: I need a tool that can be invoked from the command line (or via some API) that wires together some other program invocations to produce a graphics output from a file only containing valid TikZ code. In the best case others will find this tool useful as well.
 
 ## License
 

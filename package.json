@@ -28,7 +28,14 @@
     "imagemagick",
     "image"
   ],
+  "files": [
+    "bin",
+    "lib",
+    "templates",
+    "test"
+  ],
   "directories": {
+    "bin": "./bin",
     "lib": "./lib"
   },
   "author": "Florian Rappl",

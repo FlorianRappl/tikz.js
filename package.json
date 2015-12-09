@@ -2,7 +2,7 @@
   "name": "tikz.js",
   "version": "0.0.2",
   "bin": {
-    "tikz": "./bin/tikz"
+    "tikz": "./bin/tikz.js"
   },
   "description": "Enables the creation of standalone graphics based on PGF/TikZ with the help of LaTeX and ImageMagick.",
   "maintainers": [
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/FlorianRappl/tikz.js.git"
+    "url": "https://github.com/FlorianRappl/tikz.js"
   },
   "keywords": [
     "tikz",
@@ -29,6 +29,7 @@
     "image"
   ],
   "files": [
+    "index.js",
     "bin",
     "lib",
     "templates",
@@ -47,6 +48,9 @@
     "replace-ext": "0.0.1",
     "tmp": "0.0.28",
     "yargs": "^3.30.0"
+  },
+  "bugs": {
+    "url": "https://github.com/FlorianRappl/tikz.js/issues"
   },
   "devDependencies": {
     "nodeunit": "^0.9.1"

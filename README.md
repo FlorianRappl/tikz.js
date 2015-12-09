@@ -1,5 +1,7 @@
 # tikz.js
 
+[![npm version](https://badge.fury.io/js/tikz.js.svg)](https://badge.fury.io/js/tikz.js)
+
 tikz.js enables the creation of standalone graphics based on PGF/TikZ with the help of LaTeX and ImageMagick. It provides a simple command line tool that handles creation, conversion, and generation of high-quality images using the LaTeX based PGF library with the TikZ API.
 
 ## Requirements 

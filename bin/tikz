@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var tikz = require('../lib/tikz.js');
+var tikz = require('../lib/tikz');
 var chalk = require('chalk');
 var argv = require('yargs').
            demand(1).
@@ -8,6 +8,7 @@ var argv = require('yargs').
            default('m', 'pdf').
            choices('m', tikz.modes).
            default('e', 'pdflatex').
+           default('t', 'default').
            count('verbose').
            describe('m', 'Sets the output mode, i.e., which kind of file should be created.').
            describe('e', 'Sets the engine for compiling the tex file.').

@@ -44,7 +44,7 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "glob": "^6.0.1",
-    "pdf-image": "^1.0.1",
+    "pdf-image": "^2.0.0",
     "replace-ext": "0.0.1",
     "tmp": "0.0.28",
     "yargs": "^3.30.0"
